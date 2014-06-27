@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @author Jakub Havranek
+ * @license MIT
+ * 2012
+ */
+
 namespace Navigation;
 
 use Nette\Application\UI\Form,
