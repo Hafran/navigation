@@ -1,5 +1,10 @@
 navigation
 ==========
+Demo:
+http://navigation.codissimo.cz/
+
+Demo BackEnd: http://navigation.codissimo.cz/menu
+
 Addon for Nette for easy working, building and presenting hieratical data stored in DB. Useful for creating basic navigation or for easier working with Closure Tree system.
 
 Best Compatible with:
