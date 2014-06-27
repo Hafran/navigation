@@ -74,6 +74,7 @@ class MyNavigationBuilder extends MyNavigation {
 		$form->addHidden("id", $this->edit_id);
 		$form->addSubmit('save', 'Save')
 				->onClick[] = callback($this, 'moveFormSubmitted');
+		$form->setRenderer(new \Kdyby\BootstrapFormRenderer\BootstrapRenderer());
 		return $form;
 	}
 
@@ -149,6 +150,7 @@ class MyNavigationBuilder extends MyNavigation {
 		$form->addSubmit('save', 'Save')
 						->setAttribute('onclick', '$("#frmeditForm-title").trigger("change")')
 				->onClick[] = callback($this, 'editFormSubmitted');
+		$form->setRenderer(new \Kdyby\BootstrapFormRenderer\BootstrapRenderer());
 		return $form;
 	}
 

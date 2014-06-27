@@ -1,0 +1,9 @@
+/tests/
+/temp/
+/log/
+/www/
+/.htaccess
+/app/
+/vendor/autoload.php
+/vendor/web.config
+/vendor/.htaccess
