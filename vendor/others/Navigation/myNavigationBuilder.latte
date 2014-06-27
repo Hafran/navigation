@@ -1,0 +1,61 @@
+<style>
+	.navDiv { min-height:40px; height:20px; padding:8px; margin-bottom:5px;}
+	ul.nav-list{ padding-right:0px;}
+	ul.nav { margin-left:20px;}
+</style>
+<ul class="nav nav-pills nav-stacked">
+	{block #menu}
+	{foreach $children as $item}
+	<div class="well navDiv">
+		<li 
+			{if $item->isCurrent}
+			class="active"><a href="{$item->url}">{$item->label}</a>
+			{else}
+			>
+			{if $item->id !==0}
+			<a href="{plink "$urlOnClick", $item->id}">{$item->label}</a>
+			{else}
+			<a href="">{$item->label}</a>
+			{/if}
+				{if !$disableButtons}
+			<span style="padding:0px;margin:-4px;" class="btn-group pull-right">
+					{if ($item->id !==0 or $homepageEditable) and $editable}
+					<a href="{link getForm! name=>'edit', edit_id=>$item->id}" class="ajaxdialog btn btn-default btn-sm" rel = "edit" title="edit item"> <span class="glyphicon glyphicon-edit"> </span></a>
+					{/if}
+					<a href="{link getForm! name=>'edit', parent_id=>$item->id}" class="ajaxdialog btn btn-default btn-sm" rel="edit" title ="add child"> <span class="glyphicon glyphicon-plus"> </span></a>
+					{if $item->id !==0}
+					<a href="{link delete! id=>$item->id}" class="btn btn-default btn-sm" title="delete branch"
+					   data-confirm="modal"
+					   data-confirm-title="Potvrdit odstranění"
+					   data-confirm-header-class="alert alert-success"
+					   data-confirm-text="Vážně chcete tuto položku odstranit?"
+					   data-confirm-ok-class="btn-warning"
+					   data-confirm-ok-text="Smazat!"
+					   ><span class="glyphicon glyphicon-remove"></span></a>
+					</a>
+					<a href="{link moveUp! id=>$item->id}" class="btn btn-default btn-sm" title="move up"><span class="glyphicon glyphicon-chevron-up"></span></a>
+					<a href="{link moveDown! id=>$item->id}" class="btn btn-default btn-sm" title="move down"><span class="glyphicon glyphicon-chevron-down"></span></a>
+					<a href="{link getForm! name =>'move', edit_id=>$item->id}" class="ajaxdialog btn btn-default btn-sm" rel="move" title="move branch"><span class="glyphicon glyphicon-screenshot"> </span></a>
+					{/if}
+			</span>
+				{/if}
+	</div>
+			{/if}
+			{if $renderChildren && count($item->getComponents()) > 0}
+	<ul class="nav" name="sortable_{$item->id}_{$iterator->getCounter()}">
+		{include #menu, children => $item->getComponents()}
+	</ul>
+			{/if}
+
+</li>
+	{/foreach}
+	{/block}
+</ul>
+
+	{snippet editForm}
+		{if isset($args["showEditForm"])}{control editForm}{/if}
+	{/snippet}
+
+	{snippet moveForm}
+		{if isset($args["showMoveForm"])}{control moveForm}{/if}
+	{/snippet}

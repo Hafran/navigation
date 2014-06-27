@@ -1,0 +1,13 @@
+{block content}
+<div id="menusBlock">
+	<div id="mainMenuColumnAndRow">
+		<ul class="nav nav-pills">
+		{foreach $children as $item}
+			{continueIf $item->label=='ROOT'}
+			<li {if in_array($item, $opened)} class="active"{/if}><a href="{$item->url}">{$item->label}</a></li>
+		{/foreach}
+		</ul>
+	</div>
+	<div class="clearfix"></div>
+</div>
+{/block}

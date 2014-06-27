@@ -1,0 +1,36 @@
+{ifset $opened[0]}{? $children = $opened[0]->getComponents()}{else}{? $children = array()}{/ifset}
+{if count($children) > 0}
+<div id="subMenusBlock">
+	<div id ="subMenuColumnAndRow">
+		<ul class="nav nav-list">
+	
+	{block #menu}
+	{foreach $children as $item}
+		{if $item->id!==0}
+			<li
+			{if $item->isCurrent}
+			class="active"><a href="{$item->url}">{$item->label}</a></span>
+			{else}
+			><a href="{$item->url}">{$item->label}</a>
+			{/if}
+			{if $renderChildren && count($item->getComponents()) > 0}
+				<ul class="nav nav-list">
+			{/if}
+		{/if}
+		
+		{if $renderChildren && count($item->getComponents()) > 0 && (in_array($item,$opened) or $renderWhole)}
+			{include #menu, children => $item->getComponents()}
+		{/if}
+			
+		{if $item->id!==0}
+			{if $renderChildren && count($item->getComponents()) > 0}
+				</ul>
+			{/if}
+			</li>
+		{/if}
+	{/foreach}
+	{/block}
+		</ul>
+	</div>
+</div>
+{/if}
